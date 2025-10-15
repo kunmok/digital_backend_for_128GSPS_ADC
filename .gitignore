@@ -1,0 +1,24 @@
+
+
+# python
+venv
+
+# vim
+*.sw*
+
+# build
+build
+build-intech22-cm
+build-pdmlse
+
+# log
+hammer-vlsi-*.log
+.hammer_log/*
+pdmlse_top/.hammer_log/
+pdmlse_top/output.json
+
+# python
+__pycache__
+
+# vscode-related files 
+.vscode/*

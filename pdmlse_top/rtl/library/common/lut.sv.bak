@@ -1,0 +1,133 @@
+//==============================================================================
+// Author: Sunjin Choi
+// Description: 
+// Signals:
+// Note: 
+// Variable naming conventions:
+//    signals => snake_case
+//    Parameters (aliasing signal values) => SNAKE_CASE with all caps
+//    Parameters (not aliasing signal values) => CamelCase
+//==============================================================================
+
+// verilog_format: off
+`timescale 1ns/1ps
+`default_nettype none
+// verilog_format: on
+
+module lut #(
+    parameter int INPUT_WIDTH  = 6,
+    parameter int OUTPUT_WIDTH = 6
+) (
+    // input signals
+    input var logic i_rst,
+    input var logic i_clk,
+    input var logic [INPUT_WIDTH-1:0] i_data,
+    input var logic i_en,
+    input var logic i_cfg_mission,
+    input var logic i_cfg_load,
+
+    // output signals (configs daisy-chained)
+    output var logic [OUTPUT_WIDTH-1:0] o_data,
+    /*output var logic o_rst,*/
+    /*output var logic o_en,*/
+    output var logic o_cfg_mission,
+    output var logic o_cfg_load,
+
+    // embedded scan
+    input var  logic i_sin,
+    input var  logic i_sclk,
+    input var  logic i_sen,
+    output var logic o_sout,
+    // scan daisy chain
+    output var logic o_sclk,
+    output var logic o_sen
+);
+
+  // ----------------------------------------------------------------------
+  // Signals
+  // ----------------------------------------------------------------------
+  logic lut_table[INPUT_WIDTH][OUTPUT_WIDTH];
+
+  logic lut_table_scan[INPUT_WIDTH][OUTPUT_WIDTH];
+  logic lut_table_scan_flatten[INPUT_WIDTH*OUTPUT_WIDTH];
+  logic lut_table_scan_flatten_s1[INPUT_WIDTH*OUTPUT_WIDTH];
+
+  logic o_sout_nxt;
+
+  assign lut_table_scan_flatten = {<<{lut_table_scan}};
+
+  // ----------------------------------------------------------------------
+
+  // ----------------------------------------------------------------------
+  // Daisy Chain
+  // ----------------------------------------------------------------------
+  assign o_cfg_mission = i_cfg_mission;
+  assign o_cfg_load = i_cfg_load;
+  assign o_sclk = i_sclk;
+  assign o_sen = i_sen;
+
+  // ----------------------------------------------------------------------
+
+  // ----------------------------------------------------------------------
+  // LUT
+  // ----------------------------------------------------------------------
+
+  // at scan-mode, pipe into lut_table_scan_flatten from scan
+  //
+  // TODO: check - better sv syntax for width overflow?
+  assign lut_table_scan_flatten_s1 = {lut_table_scan_flatten << 1, i_sin};
+  assign o_sout_nxt = lut_table_scan_flatten[INPUT_WIDTH*OUTPUT_WIDTH-1];
+  // TODO: check - need separate i_srst or just use i_rst?
+  always_ff @(posedge i_sclk or posedge i_rst) begin
+    if (i_rst) begin
+      lut_table_scan_flatten <= 0;
+      o_sout <= 0;
+    end
+    else begin
+      if (i_sen) begin
+        lut_table_scan_flatten <= lut_table_scan_flatten_s1;
+        o_sout <= o_sout_nxt;
+      end
+    end
+  end
+
+  // you *should* flag i_cfg_load to 1 to load the table from scan
+  // instantiated as always_ff to clearly define lut_table as separate clk
+  // domain
+  // TODO: check if there is a better way
+  always_ff @(posedge i_clk or posedge i_rst) begin
+    if (i_rst) begin
+      lut_table <= '0;
+    end
+    else begin
+      if (i_en & i_cfg_load) begin
+        lut_table <= lut_table_scan;
+      end
+      else begin
+        lut_table <= '0;
+      end
+    end
+  end
+
+  // at mission-mode, input becomes an addr to the lut table
+  always_ff @(posedge i_clk or posedge i_rst) begin
+    if (i_rst) begin
+      o_data <= '0;
+    end
+    else begin
+      if (i_en & i_cfg_mission) begin
+        o_data <= lut_table[i_data];
+      end
+      else begin
+        o_data <= '0;
+      end
+    end
+  end
+
+  // ----------------------------------------------------------------------
+
+
+endmodule
+
+`default_nettype wire
+

@@ -1,0 +1,112 @@
+module AA_TDC_BUFFERS_x16 (
+    input wire [15:0] iclk_deser,
+    input wire [15:0] irstb_deser,
+    input wire [5:0] idat_deser0,
+    input wire [5:0] idat_deser1,
+    input wire [5:0] idat_deser2,
+    input wire [5:0] idat_deser3,
+    input wire [5:0] idat_deser4,
+    input wire [5:0] idat_deser5,
+    input wire [5:0] idat_deser6,
+    input wire [5:0] idat_deser7,
+    input wire [5:0] idat_deser8,
+    input wire [5:0] idat_deser9,
+    input wire [5:0] idat_deser10,
+    input wire [5:0] idat_deser11,
+    input wire [5:0] idat_deser12,
+    input wire [5:0] idat_deser13,
+    input wire [5:0] idat_deser14,
+    input wire [5:0] idat_deser15,
+    input wire [5:0] idat_deser16,
+    input wire [5:0] idat_deser17,
+    input wire [5:0] idat_deser18,
+    input wire [5:0] idat_deser19,
+    input wire [5:0] idat_deser20,
+    input wire [5:0] idat_deser21,
+    input wire [5:0] idat_deser22,
+    input wire [5:0] idat_deser23,
+    input wire [5:0] idat_deser24,
+    input wire [5:0] idat_deser25,
+    input wire [5:0] idat_deser26,
+    input wire [5:0] idat_deser27,
+    input wire [5:0] idat_deser28,
+    input wire [5:0] idat_deser29,
+    input wire [5:0] idat_deser30,
+    input wire [5:0] idat_deser31,
+    output wire [15:0] oclk_deser,
+    output wire [15:0] orstb_deser,
+    output wire [5:0] odat_deser0,
+    output wire [5:0] odat_deser1,
+    output wire [5:0] odat_deser2,
+    output wire [5:0] odat_deser3,
+    output wire [5:0] odat_deser4,
+    output wire [5:0] odat_deser5,
+    output wire [5:0] odat_deser6,
+    output wire [5:0] odat_deser7,
+    output wire [5:0] odat_deser8,
+    output wire [5:0] odat_deser9,
+    output wire [5:0] odat_deser10,
+    output wire [5:0] odat_deser11,
+    output wire [5:0] odat_deser12,
+    output wire [5:0] odat_deser13,
+    output wire [5:0] odat_deser14,
+    output wire [5:0] odat_deser15,
+    output wire [5:0] odat_deser16,
+    output wire [5:0] odat_deser17,
+    output wire [5:0] odat_deser18,
+    output wire [5:0] odat_deser19,
+    output wire [5:0] odat_deser20,
+    output wire [5:0] odat_deser21,
+    output wire [5:0] odat_deser22,
+    output wire [5:0] odat_deser23,
+    output wire [5:0] odat_deser24,
+    output wire [5:0] odat_deser25,
+    output wire [5:0] odat_deser26,
+    output wire [5:0] odat_deser27,
+    output wire [5:0] odat_deser28,
+    output wire [5:0] odat_deser29,
+    output wire [5:0] odat_deser30,
+    output wire [5:0] odat_deser31,
+    inout wire DVDD,
+    inout wire VSS
+);
+
+`ifdef SIMULATION
+  // pass through signals for simulation
+  assign oclk_deser   = iclk_deser;
+  assign orstb_deser  = irstb_deser;
+  assign odat_deser0  = idat_deser0;
+  assign odat_deser1  = idat_deser1;
+  assign odat_deser2  = idat_deser2;
+  assign odat_deser3  = idat_deser3;
+  assign odat_deser4  = idat_deser4;
+  assign odat_deser5  = idat_deser5;
+  assign odat_deser6  = idat_deser6;
+  assign odat_deser7  = idat_deser7;
+  assign odat_deser8  = idat_deser8;
+  assign odat_deser9  = idat_deser9;
+  assign odat_deser10 = idat_deser10;
+  assign odat_deser11 = idat_deser11;
+  assign odat_deser12 = idat_deser12;
+  assign odat_deser13 = idat_deser13;
+  assign odat_deser14 = idat_deser14;
+  assign odat_deser15 = idat_deser15;
+  assign odat_deser16 = idat_deser16;
+  assign odat_deser17 = idat_deser17;
+  assign odat_deser18 = idat_deser18;
+  assign odat_deser19 = idat_deser19;
+  assign odat_deser20 = idat_deser20;
+  assign odat_deser21 = idat_deser21;
+  assign odat_deser22 = idat_deser22;
+  assign odat_deser23 = idat_deser23;
+  assign odat_deser24 = idat_deser24;
+  assign odat_deser25 = idat_deser25;
+  assign odat_deser26 = idat_deser26;
+  assign odat_deser27 = idat_deser27;
+  assign odat_deser28 = idat_deser28;
+  assign odat_deser29 = idat_deser29;
+  assign odat_deser30 = idat_deser30;
+  assign odat_deser31 = idat_deser31;
+`endif
+
+endmodule
