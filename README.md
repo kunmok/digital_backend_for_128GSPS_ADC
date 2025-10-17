@@ -146,6 +146,14 @@ Contains scan clock generators, PRBS sources, and pattern generator wrappers
 used in both verification environments. Include these files when compiling the
 testbenches.
 
+### Caution
+
+Automated verification of memory (`dsp_mem`) in SystemVerilog is under 
+construction. Memory block has been verified in raw Verilog style testbench,
+and post-silicon bringup. We welcome contributions to extending SystemVerilog
+testbenches to fuzz-test various operational modes for `dsp_mem`!
+
+
 ## Configuration & Parameters
 
 - Common widths (`LANE_WIDTH`, `ADC_WIDTH`, `DES_OUT_WIDTH`, etc.) live in
