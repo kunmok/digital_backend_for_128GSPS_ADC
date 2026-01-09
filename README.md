@@ -175,6 +175,8 @@ This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICEN
 
 ## Contact
 
-- [Sunjin Choi](mailto:sunjin_choi@berkeley.edu)
-- [Kunmo Kim](mailto:kunmok@berkeley.edu)
+For questions or access to proprietary IP, please reach out to the authors:
+
+- Sunjin Choi - <sunjin_choi@berkeley.edu>
+- Kunmo Kim - <kunmok@berkeley.edu>
 
