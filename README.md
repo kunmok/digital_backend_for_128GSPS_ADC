@@ -169,6 +169,12 @@ testbenches to fuzz-test various operational modes for `dsp_mem`!
 Adjust these definitions carefully; many modules and BFMs share the same
 `define` values, so changes should be validated across RTL and testbench.
 
-## Citation
+## License
 
-TODO
+This project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+- [Sunjin Choi](mailto:sunjin_choi@berkeley.edu)
+- [Kunmo Kim](mailto:kunmok@berkeley.edu)
+
